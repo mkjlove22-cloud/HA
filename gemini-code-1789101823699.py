@@ -79,3 +79,19 @@ with col2:
     st.subheader("📍 의료 & 바이오 (ISRG, VRTX)")
     # 의료 로봇, 바이오 관련 뉴스 필터링
     get_news("인튜이티브 서지컬 OR 버텍스 OR ISRG OR VRTX (의료 OR 로봇 OR 바이오)")
+    st.divider()
+
+# --- 4. 거시 경제 핵심 뉴스 ---
+st.header("4. 매크로 팩트 체크 (한·미·일)")
+
+mac_col1, mac_col2 = st.columns(2)
+
+with mac_col1:
+    st.subheader("🇺🇸 미국 (연준·금리·인플레)")
+    # 미국 거시경제 필터링
+    get_news("연준 OR 파월 OR 금리 인하 OR CPI OR 미국 인플레이션")
+
+with mac_col2:
+    st.subheader("🇯🇵·🇰🇷 아시아 (엔캐리·한국은행)")
+    # 일본/한국 거시경제 필터링
+    get_news("일본은행 OR BOJ OR 엔캐리 OR 한국은행 금리")

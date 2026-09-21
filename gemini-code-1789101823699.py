@@ -40,11 +40,11 @@ st.divider()
 # --- 2. 타겟 4종목 시세 ---
 st.header("2. 타겟 5개 기업 시세")
 stocks = {
-    "Nvidia (AI 대장)": "NVDA"
+    "Nvidia (AI 대장)": "NVDA",
     "SPCX (AI/인프라)": "SPCX",
     "Alphabet (자체칩/AI)": "GOOGL",
     "Intuitive (의료로봇)": "ISRG",
-    "Vertex (바이오)": "VRTX",
+    "Vertex (바이오)": "VRTX"
 }
 
 cols_s = st.columns(5) # 4개에서 5개로 늘림

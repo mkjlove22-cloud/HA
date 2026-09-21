@@ -10,13 +10,15 @@ st.title("📈 사령관 전용 터미널 (매크로 & 타겟 종목)")
 # --- 1. 매크로 지표 & 환율 ---
 st.header("1. 매크로 방어선 (한·미·일)")
 macro_tickers = {
-    "원/달러 환율": "KRW=X", 
-    "원/엔 환율(100엔)": "JPYKRW=X", 
-    "나스닥": "^IXIC", 
-    "S&P 500": "^GSPC"
+    "원/달러 환율": "KRW=X",
+    "원/엔 환율(100엔)": "JPYKRW=X",
+    "나스닥": "^IXIC",
+    "S&P 500": "^GSPC",
+    "WTI 원유 (뇌관)": "CL=F",
+    "브렌트유 (뇌관)": "BZ=F"
 }
 
-cols = st.columns(4)
+cols = st.columns(6) # 4개에서 6개로 늘림
 for i, (name, ticker) in enumerate(macro_tickers.items()):
     try:
         data = yf.Ticker(ticker).history(period="5d")
@@ -36,15 +38,16 @@ for i, (name, ticker) in enumerate(macro_tickers.items()):
 st.divider()
 
 # --- 2. 타겟 4종목 시세 ---
-st.header("2. 타겟 4개 기업 시세")
+st.header("2. 타겟 5개 기업 시세")
 stocks = {
-    "SPCX (AI/인프라)": "SPCX", 
-    "Alphabet (자체칩/AI)": "GOOGL", 
-    "Intuitive (의료로봇)": "ISRG", 
-    "Vertex (바이오)": "VRTX"
+    "SPCX (AI/인프라)": "SPCX",
+    "Alphabet (자체칩/AI)": "GOOGL",
+    "Intuitive (의료로봇)": "ISRG",
+    "Vertex (바이오)": "VRTX",
+    "Nvidia (AI 대장)": "NVDA"
 }
 
-cols_s = st.columns(4)
+cols_s = st.columns(5) # 4개에서 5개로 늘림
 for i, (name, ticker) in enumerate(stocks.items()):
     try:
         data = yf.Ticker(ticker).history(period="5d")

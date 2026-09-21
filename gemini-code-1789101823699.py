@@ -74,10 +74,9 @@ def get_news(query):
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("📍 반도체 & AI (SPCX, GOOGL)")
-    # 반도체, AI 관련 뉴스 필터링
-    get_news("스페이스X OR 구글 OR SPCX OR GOOGL (반도체 OR AI OR 데이터센터)")
-
+    st.subheader("📍 반도체 & AI (NVDA, SPCX, GOOGL)") 
+    # 엔비디아, 반도체, AI 관련 뉴스 필터링
+     get_news("엔비디아 OR NVDA OR 스페이스X OR 구글 OR SPCX OR GOOGL (반도체 OR AI OR 데이터센터)")
 with col2:
     st.subheader("📍 의료 & 바이오 (ISRG, VRTX)")
     # 의료 로봇, 바이오 관련 뉴스 필터링

@@ -97,3 +97,21 @@ with mac_col2:
     st.subheader("🇯🇵·🇰🇷 아시아 (엔캐리·한국은행)")
     # 일본/한국 거시경제 필터링
     get_news("일본은행 OR BOJ OR 엔캐리 OR 한국은행 금리")
+
+# --- 5. 비상장 딥테크 감시망 (IPO & 빅테크 투자) ---
+st.header("5. 비상장 딥테크 감시망 (IPO & 빅테크 투자)")
+
+# 10개 타겟을 두 섹션으로 나누어 배치
+ipo_col1, ipo_col2 = st.columns(2)
+
+with ipo_col1:
+    st.subheader("🚀 우주 인프라 & 양자 컴퓨팅")
+    # 바르다 스페이스, K2 스페이스, 퀀텀 머신스, 싸이퀀텀
+    get_news('("Varda Space" OR "K2 Space" OR "Quantum Machines" OR PsiQuantum) AND (IPO OR "S-1" OR 상장 OR 인수 OR funding)')
+
+with ipo_col2:
+    st.subheader("🧬 바이오 파운드리 & 🤖 피지컬 AI")
+    # 컬처 바이오, 아시모프, 셀레스티얼, 헬리온, Pi, 피규어 AI
+    get_news('("Culture Biosciences" OR Asimov OR "Celestial AI" OR "Helion Energy" OR "Physical Intelligence" OR "Figure AI") AND (IPO OR "S-1" OR 상장 OR 인수 OR funding)')
+    
+st.divider()

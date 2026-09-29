@@ -60,27 +60,57 @@ for i, (name, ticker) in enumerate(stocks.items()):
 
 st.divider()
 
-# --- 3. 실시간 뉴스 크롤링 ---
+import urllib.parse
+import feedparser
+import difflib
+import streamlit as st
+
+# --- 3. 실시간 뉴스 크롤링 (중복 차단 로직 적용) ---
 st.header("3. 핵심 산업 뉴스 클리핑")
+
+def is_similar(title1, title2, threshold=0.45):
+    """두 기사 제목의 텍스트 유사도가 45% 이상이면 복붙 기사로 간주"""
+    return difflib.SequenceMatcher(None, title1, title2).ratio() > threshold
 
 def get_news(query):
     encoded_query = urllib.parse.quote(query)
     # 구글 뉴스 RSS URL (한국 기준)
     url = f"https://news.google.com/rss/search?q={encoded_query}&hl=ko&gl=KR&ceid=KR:ko"
     feed = feedparser.parse(url)
-    for entry in feed.entries[:5]: # 최신 5개만 출력
-        st.write(f"- [{entry.title}]({entry.link})")
+    
+    seen_titles = []
+    printed_count = 0
+    
+    for entry in feed.entries:
+        if printed_count >= 5: # 깨끗한 뉴스 5개를 채우면 종료
+            break
+            
+        current_title = entry.title
+        
+        # 중복(유사) 기사 필터링
+        is_duplicate = False
+        for seen in seen_titles:
+            if is_similar(current_title, seen):
+                is_duplicate = True
+                break
+        
+        # 중복이 아닌 신규 팩트 기사만 출력
+        if not is_duplicate:
+            st.write(f"- [{current_title}]({entry.link})")
+            seen_titles.append(current_title)
+            printed_count += 1
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("📍 반도체 & AI (NVDA, SPCX, GOOGL)") 
     # 엔비디아, 반도체, AI 관련 뉴스 필터링
-    get_news("엔비디아 OR NVDA OR 스페이스X OR 구글 OR SPCX OR GOOGL (반도체 OR AI OR 데이터센터)")
+    get_news("엔비디아 OR NVDA OR 스페이스X OR 구글 OR SPCX OR GOOGL (데이터센터 OR 실적 OR 자사주 OR 인수)")
+    
 with col2:
     st.subheader("📍 의료 & 바이오 (ISRG, VRTX)")
-    # 의료 로봇, 바이오 관련 뉴스 필터링
-    get_news("인튜이티브 서지컬 OR 버텍스 OR ISRG OR VRTX (의료 OR 로봇 OR 바이오)")
+    # 단순 '의료' 단어 대신 명확한 '팩트' 키워드로 튜닝
+    get_news("인튜이티브 서지컬 OR 버텍스 OR ISRG OR VRTX (FDA OR 임상 OR 인수 OR 공시 OR 보도자료)")
     st.divider()
 
 # --- 4. 거시 경제 핵심 뉴스 ---

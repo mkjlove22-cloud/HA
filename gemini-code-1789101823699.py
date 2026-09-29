@@ -414,7 +414,7 @@ def show_company_news(company):
     )
 
 
-st.header("3. 보유 종목 핵심 변화")
+st.header("6. 보유 종목 핵심 변화")
 
 columns = st.columns(2)
 

@@ -1,7 +1,8 @@
 import streamlit as st
 import yfinance as yf
-import feedparser
+import difflib
 import urllib.parse
+import feedparser
 
 # 페이지 기본 설정
 st.set_page_config(page_title="사령관 대시보드", layout="wide")
